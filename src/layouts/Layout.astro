@@ -1,0 +1,29 @@
+---
+import "@/styles/globals.css";
+import Header from "@/_component/Header";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Sushiwood Fernie",
+  description = "Sushiwood blends the best of Japanese and Korean cuisine, offering a fusion of traditional flavors with a modern twist. Enjoy fresh sushi, sashimi, and Korean specialties in a cozy, vibrant setting.",
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/sushiwood/favicon-with-icon/favicon.ico" sizes="any" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <slot name="head" />
+  </head>
+  <body class="text-white bg-black">
+    <Header client:load />
+    <slot />
+  </body>
+</html>

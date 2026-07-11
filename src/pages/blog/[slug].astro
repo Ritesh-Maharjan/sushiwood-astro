@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const date = post.data.date.toLocaleDateString("en-US", {
+  month: "long",
+  day: "2-digit",
+  year: "numeric",
+});
+---
+
+<Layout title={post.data.title}>
+  <div class="bg-white text-black">
+    <article class="prose prose-lg mx-auto p-6 pb-24 max-w-7xl">
+      <header class="pb-12">
+        <p class="text-gray-500 text-xl text-right mb-6">{date}</p>
+        <h1 class="text-4xl font-bold text-center">{post.data.title}</h1>
+      </header>
+      <main class="post-body flex flex-col gap-4">
+        <Content />
+      </main>
+    </article>
+  </div>
+</Layout>
+
+<style is:global>
+  /* Match the markdown styling the Next.js page applied via react-markdown */
+  .post-body h2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+  }
+  .post-body ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .post-body img {
+    max-width: 100%;
+  }
+</style>

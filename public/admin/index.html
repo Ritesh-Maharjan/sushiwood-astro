@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head> </head>
+  <body>
+    <!-- Replace "cms-root" with "nc-root" -->
+    <div id="nc-root"></div>
+
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        window.addEventListener("message", (event) => {
+          if (event.origin !== window.location.origin) return;
+
+          const { access_token } = event.data;
+          if (access_token) {
+            const userData = {
+              token: access_token,
+              backendName: "github",
+            };
+            localStorage.setItem("decap-cms-user", JSON.stringify(userData));
+            window.location.reload();
+          }
+        });
+
+        window.CMS.init();
+      });
+    </script>
+  </body>
+</html>

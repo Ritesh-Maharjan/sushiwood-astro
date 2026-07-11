@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import LocationLanding from "@/components/LocationLanding.astro";
+import { locationData, restaurantSchema, type LocationSlug } from "@/lib/locationData";
+
+export function getStaticPaths() {
+  return (Object.keys(locationData) as LocationSlug[]).map((location) => ({
+    params: { location },
+  }));
+}
+
+const location = Astro.params.location as LocationSlug;
+const data = locationData[location];
+const schema = restaurantSchema(location);
+---
+
+<Layout title={data.title} description={data.description}>
+  <Fragment slot="head">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={data.title} />
+    <meta name="twitter:description" content={data.description} />
+    <meta name="twitter:image" content={data.image} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+
+  <LocationLanding location={location} />
+</Layout>
