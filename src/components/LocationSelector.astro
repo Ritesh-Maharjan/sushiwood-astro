@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import fernieImg from '@/assets/sushiwood/sushiwood-fernie.webp';
+import nelsonImg from '@/assets/sushiwood/sushiwood-nelson.webp';
+import castlegarImg from '@/assets/sushiwood/sushiwood-castlegar.webp';
+
+const locations = [
+  {
+    name: "Sushiwood - Fernie",
+    address: "A-1221 7th Ave, Fernie, BC, Canada V0B 1M0",
+    image: fernieImg,
+    slug: "/",
+  },
+  {
+    name: "Sushiwood - Nelson",
+    address: "702 Vernon St, Nelson, BC V1L 4G2",
+    image: nelsonImg,
+    slug: "/nelson",
+  },
+  {
+    name: "Sushiwood - Castlegar",
+    address: "Columbia Ave, Castlegar, BC V1N 1A9",
+    image: castlegarImg,
+    slug: "/castlegar",
+  },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<div class="flex flex-wrap gap-4 justify-center">
+  {locations.map((loc) => {
+    const isActive = loc.slug === '/'
+      ? currentPath === '/'
+      : currentPath.startsWith(loc.slug);
+    return (
+      <a
+        href={loc.slug}
+        class={`relative rounded overflow-hidden shadow-md transition-transform duration-200 ${isActive ? 'border-2 border-yellow-500 scale-105' : ''}`}
+      >
+        <div class="relative w-80 h-60">
+          <Image
+            src={loc.image}
+            alt={loc.name}
+            width={320}
+            height={240}
+            quality={80}
+            class="object-cover rounded w-full h-full"
+          />
+        </div>
+        <div
+          class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white p-2 text-center"
+          style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8)"
+        >
+          <p class="font-bold">{loc.name}</p>
+          <p class="text-xs">{loc.address}</p>
+        </div>
+      </a>
+    );
+  })}
+</div>

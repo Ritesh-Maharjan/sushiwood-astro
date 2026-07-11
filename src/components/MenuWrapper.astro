@@ -1,0 +1,44 @@
+---
+import { getImage } from 'astro:assets';
+import Menu from "@/_component/Menu";
+import type { LocationSlug } from "@/lib/locationData";
+
+// Fernie food menu (9 pages)
+import fm0 from '@/assets/sushiwood/fernie-menu/food-menu/menu-0.webp';
+import fm1 from '@/assets/sushiwood/fernie-menu/food-menu/menu-1.webp';
+import fm2 from '@/assets/sushiwood/fernie-menu/food-menu/menu-2.webp';
+import fm3 from '@/assets/sushiwood/fernie-menu/food-menu/menu-3.webp';
+import fm4 from '@/assets/sushiwood/fernie-menu/food-menu/menu-4.webp';
+import fm5 from '@/assets/sushiwood/fernie-menu/food-menu/menu-5.webp';
+import fm6 from '@/assets/sushiwood/fernie-menu/food-menu/menu-6.webp';
+import fm7 from '@/assets/sushiwood/fernie-menu/food-menu/menu-7.webp';
+import fm8 from '@/assets/sushiwood/fernie-menu/food-menu/menu-8.webp';
+
+// Nelson menu (4 pages)
+import nm1 from '@/assets/sushiwood/nelson-menu/nelson-menu-1.webp';
+import nm2 from '@/assets/sushiwood/nelson-menu/nelson-menu-2.webp';
+import nm3 from '@/assets/sushiwood/nelson-menu/nelson-menu-3.webp';
+import nm4 from '@/assets/sushiwood/nelson-menu/nelson-menu-4.webp';
+
+// Castlegar coming soon
+import cs from '@/assets/sushiwood/castlegar-menu/comming-soon.jpg';
+
+interface Props { location: LocationSlug }
+const { location } = Astro.props;
+
+const opt = (src: Parameters<typeof getImage>[0]['src']) =>
+  getImage({ src, width: 700, format: 'webp', quality: 80 });
+
+const [fernieImgs, nelsonImgs, castlegarImgs] = await Promise.all([
+  Promise.all([fm0, fm1, fm2, fm3, fm4, fm5, fm6, fm7, fm8].map(opt)),
+  Promise.all([nm1, nm2, nm3, nm4].map(opt)),
+  Promise.all([cs].map(opt)),
+]);
+
+const menuImages =
+  location === 'nelson' ? nelsonImgs.map(i => i.src) :
+  location === 'castlegar' ? castlegarImgs.map(i => i.src) :
+  fernieImgs.map(i => i.src);
+---
+
+<Menu client:visible location={location} menuImages={menuImages} />

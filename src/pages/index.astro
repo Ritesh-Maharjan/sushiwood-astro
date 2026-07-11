@@ -1,8 +1,16 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import LocationLanding from "@/components/LocationLanding.astro";
+import { locationData } from "@/lib/locationData";
+
+const fernie = locationData.fernie;
 ---
 
-<Layout>
+<Layout
+  title={fernie.title}
+  description={fernie.description}
+  ogImage={fernie.image}
+  ogUrl={fernie.url}
+>
   <LocationLanding location="fernie" />
 </Layout>

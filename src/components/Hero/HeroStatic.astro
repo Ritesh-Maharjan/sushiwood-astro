@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '@/assets/sushiwood/hero-img2.webp';
+import HeroButtons from "./HeroButtons";
+---
+
+<section id="home">
+  <div class="max-w-screen-xl mx-auto py-2 px-2 mt-8 flex flex-col gap-y-12 pl-14">
+    <h1 class="text-5xl flex flex-col tracking-widest absolute top-[20%] z-20 max-w-[90%] sm:max-w-none">
+      <span class="uppercase tracking-tight font-medium text-4xl lg:text-6xl md:text-5xl">
+        Sushiwood
+      </span>
+      <div class="w-40 md:w-80 h-0.5 my-2"></div>
+      <span class="text-2xl md:text-3xl tracking-tighter text-left self-start leading-tight">
+        <span class="block sm:inline">Korean & Japanese</span>
+        <span class="block sm:inline"> Restaurant</span>
+      </span>
+    </h1>
+  </div>
+
+  <!-- Only the two mobile buttons need React (popup store) -->
+  <HeroButtons client:load />
+
+  <figure class="w-full relative aspect-[2/1] sm:aspect-[3/1] md:aspect-auto -mt-12 -z-20">
+    <Image
+      src={heroImg}
+      alt="long line of sushi"
+      widths={[640, 1024, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      quality={85}
+      class="w-full h-[100vh] sm:h-[600px] md:h-screen object-cover"
+    />
+  </figure>
+</section>

@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import MaxWidthContent from "@/_component/MaxWidthContent";
+import p1 from '@/assets/sushiwood/9-1.webp';
+import p2 from '@/assets/sushiwood/9-2.webp';
+import p3 from '@/assets/sushiwood/9-3.webp';
+import p4 from '@/assets/sushiwood/9-4.webp';
+import p5 from '@/assets/sushiwood/9-5.webp';
+import p6 from '@/assets/sushiwood/9-6.webp';
+import p7 from '@/assets/sushiwood/9-7.webp';
+import p8 from '@/assets/sushiwood/9-8.webp';
+import p9 from '@/assets/sushiwood/9-9.png';
+
+const photos = [
+  { src: p1, delay: "1s" },
+  { src: p2, delay: "7s" },
+  { src: p3, delay: "3s" },
+  { src: p4, delay: "5s" },
+  { src: p5, delay: "11s" },
+  { src: p6, delay: "1s" },
+  { src: p7, delay: "7s" },
+  { src: p8, delay: "2s" },
+  { src: p9, delay: "5s" },
+];
+---
+
+<section id="restaurant-photo">
+  <MaxWidthContent className="px-4 py-20">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {photos.map((photo, index) => (
+        <figure class="overflow-hidden h-auto w-full flex items-center justify-center">
+          <Image
+            src={photo.src}
+            alt={`Closer looks of sushi ${index}`}
+            width={600}
+            quality={75}
+            loading="lazy"
+            class="object-cover h-full w-full animate-blink max-h-80 hover:animate-none"
+            style={`animation-delay: ${photo.delay}`}
+          />
+        </figure>
+      ))}
+    </div>
+  </MaxWidthContent>
+</section>

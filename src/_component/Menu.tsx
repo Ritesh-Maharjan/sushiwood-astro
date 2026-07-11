@@ -12,35 +12,14 @@ import { SidebarClose } from "lucide-react";
 
 const Menu = ({
   location,
+  menuImages,
 }: {
   location: "fernie" | "nelson" | "castlegar";
+  menuImages: string[];
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  let menuImageArr = [];
-
-  if (location === "nelson") {
-    menuImageArr = [
-      "/sushiwood/nelson-menu/nelson-menu-1.webp",
-      "/sushiwood/nelson-menu/nelson-menu-2.webp",
-      "/sushiwood/nelson-menu/nelson-menu-3.webp",
-      "/sushiwood/nelson-menu/nelson-menu-4.webp",
-    ];
-  } else if (location === "castlegar") {
-    menuImageArr = ["/sushiwood/castlegar-menu/comming-soon.jpg"];
-  } else {
-    menuImageArr = [
-      "/sushiwood/fernie-menu/food-menu/menu-0.webp",
-      "/sushiwood/fernie-menu/food-menu/menu-1.webp",
-      "/sushiwood/fernie-menu/food-menu/menu-2.webp",
-      "/sushiwood/fernie-menu/food-menu/menu-3.webp",
-      "/sushiwood/fernie-menu/food-menu/menu-4.webp",
-      "/sushiwood/fernie-menu/food-menu/menu-5.webp",
-      "/sushiwood/fernie-menu/food-menu/menu-6.webp",
-      "/sushiwood/fernie-menu/food-menu/menu-7.webp",
-      "/sushiwood/fernie-menu/food-menu/menu-8.webp",
-    ];
-  }
+  const menuImageArr = menuImages;
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);

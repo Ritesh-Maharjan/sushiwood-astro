@@ -1,3 +1,1 @@
-export { default as OurPhilosophy } from "./OurPhilosophy";
-export { default as LocationSelector } from "./LocationSelector";
-export { default as RestaurantPhoto } from "./RestaurantPhoto";
+// OurPhilosophy, LocationSelector, RestaurantPhoto are now .astro components — imported directly in LocationLanding.astro

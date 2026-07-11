@@ -14,7 +14,7 @@ const data = locationData[location];
 const schema = restaurantSchema(location);
 ---
 
-<Layout title={data.title} description={data.description}>
+<Layout title={data.title} description={data.description} ogImage={data.image} ogUrl={data.url}>
   <Fragment slot="head">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={data.title} />
