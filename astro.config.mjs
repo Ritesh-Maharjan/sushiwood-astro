@@ -8,7 +8,14 @@ export default defineConfig({
   site: "https://sushiwood.ca",
   output: "static",
   adapter: node({ mode: "standalone" }),
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) =>
+        // /fernie canonicalizes to the root; auth-callback is a CMS utility page
+        !page.includes("/fernie") && !page.includes("/auth-callback"),
+    }),
+  ],
   build: {
     // Inline all CSS into the HTML — removes render-blocking stylesheet requests
     inlineStylesheets: "always",

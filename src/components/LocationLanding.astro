@@ -6,6 +6,7 @@ import LocationSelector from "@/components/LocationSelector.astro";
 import OurPhilosophy from "@/components/OurPhilosophy.astro";
 import RestaurantPhoto from "@/components/RestaurantPhoto.astro";
 import MenuWrapper from "@/components/MenuWrapper.astro";
+import TextMenu from "@/components/TextMenu.astro";
 import type { LocationSlug } from "@/lib/locationData";
 
 interface Props {
@@ -41,6 +42,9 @@ const { location } = Astro.props;
 
   <!-- Menu images pre-optimized at build time, Swiper hydrates on scroll -->
   <MenuWrapper location={location} />
+
+  <!-- Crawlable text version of the menu (search engines can't read the menu images) -->
+  <TextMenu location={location} />
 </main>
 
 <Footer location={location} />

@@ -122,6 +122,7 @@ const Footer = ({ location }: { location: LocationKey }) => {
                   href={`${currentLocation.facebooklink}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${currentLocation.name} on Facebook`}
                 >
                   <Facebook className="h-8 w-8 cursor-pointer" />
                 </a>
@@ -129,6 +130,7 @@ const Footer = ({ location }: { location: LocationKey }) => {
                   href={`${currentLocation.instagramlink}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${currentLocation.name} on Instagram`}
                 >
                   <Instagram className="h-8 w-8 cursor-pointer" />
                 </a>

@@ -121,13 +121,13 @@ const Header = () => {
 				</main>
 
 				<footer className='absolute bottom-3 flex items-center justify-center mx-auto w-full gap-4'>
-					<a href='https://maps.app.goo.gl/8gs1Utxdh21Wfe1N9' target='_blank' rel='noopener noreferrer'>
+					<a href='https://maps.app.goo.gl/8gs1Utxdh21Wfe1N9' target='_blank' rel='noopener noreferrer' aria-label='SushiWood on Google Maps'>
 						<MapPin className='h-8 w-8 cursor-pointer' />
 					</a>
-					<a href='https://www.facebook.com/media/set/?set=a.750329719694381' target='_blank' rel='noopener noreferrer'>
+					<a href='https://www.facebook.com/media/set/?set=a.750329719694381' target='_blank' rel='noopener noreferrer' aria-label='SushiWood on Facebook'>
 						<Facebook className='h-8 w-8 cursor-pointer' />
 					</a>
-					<a href='https://www.instagram.com/ferniesushiwood/?hl=en' target='_blank' rel='noopener noreferrer'>
+					<a href='https://www.instagram.com/ferniesushiwood/?hl=en' target='_blank' rel='noopener noreferrer' aria-label='SushiWood on Instagram'>
 						<Instagram className='h-8 w-8 cursor-pointer' />
 					</a>
 				</footer>

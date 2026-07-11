@@ -65,7 +65,7 @@ const Menu = ({
           <SwiperSlide key={index} className="relative max-w-xl">
             <img
               src={`${el}`}
-              alt={"menu"}
+              alt={`SushiWood ${location} menu page ${index + 1}`}
               height={3300}
               width={2550}
               loading="lazy"
@@ -105,7 +105,7 @@ const Menu = ({
                 <SwiperSlide key={index} className="relative w-full">
                   <img
                     src={`${el}`}
-                    alt={"menu"}
+                    alt={`SushiWood ${location} menu page ${index + 1}`}
                     height={3300}
                     width={2550}
                     loading="lazy"

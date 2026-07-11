@@ -1,0 +1,53 @@
+---
+import { menus } from "@/lib/menuData";
+import type { LocationSlug } from "@/lib/locationData";
+
+interface Props {
+  location: LocationSlug;
+}
+
+const { location } = Astro.props;
+const sections = menus[location];
+---
+
+{sections && (
+  <section class="max-w-screen-xl mx-auto px-4 md:px-14 w-full">
+    <details class="group">
+      <summary class="cursor-pointer list-none flex items-center justify-center gap-3 py-4 text-lg font-brandon-text uppercase tracking-wide border border-gray-600 rounded-md hover:border-golden transition-colors">
+        <span>Browse Full Menu as Text</span>
+        <span class="transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
+      </summary>
+
+      <div class="pt-10 columns-1 md:columns-2 gap-12">
+        {sections.map((section) => (
+          <div class="break-inside-avoid mb-10">
+            <h3 class="text-2xl font-brandon-text uppercase tracking-wide text-golden border-b border-gray-600 pb-2 mb-1">
+              {section.title}
+            </h3>
+            {section.note && <p class="text-sm text-stone-400 mb-2">{section.note}</p>}
+            <ul class="flex flex-col gap-3 mt-4">
+              {section.items.map((item) => (
+                <li>
+                  <div class="flex justify-between items-baseline gap-4">
+                    <span class="font-semibold">
+                      {item.name}
+                      {item.spicy && <span title="Spicy" class="text-red-500 ml-1">🌶</span>}
+                    </span>
+                    <span class="text-stone-300 whitespace-nowrap">{item.price}</span>
+                  </div>
+                  {item.description && (
+                    <p class="text-sm text-stone-400">{item.description}</p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-xs text-stone-500 text-center pb-8">
+        Menu items and prices are subject to change. Please inform us of any food allergies.
+      </p>
+    </details>
+  </section>
+)}

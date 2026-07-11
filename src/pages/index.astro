@@ -1,9 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import LocationLanding from "@/components/LocationLanding.astro";
-import { locationData } from "@/lib/locationData";
+import { locationData, restaurantSchema } from "@/lib/locationData";
 
 const fernie = locationData.fernie;
+const schema = restaurantSchema("fernie");
 ---
 
 <Layout
@@ -12,5 +13,9 @@ const fernie = locationData.fernie;
   ogImage={fernie.image}
   ogUrl={fernie.url}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+
   <LocationLanding location="fernie" />
 </Layout>

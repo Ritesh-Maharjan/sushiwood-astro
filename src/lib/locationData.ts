@@ -1,4 +1,6 @@
 // Single source of truth for per-location page metadata and structured data
+import { menuSchema } from "@/lib/menuData";
+
 export const locationData = {
   fernie: {
     name: "SushiWood Fernie",
@@ -7,7 +9,8 @@ export const locationData = {
       "Experience Japanese and Korean flavors in Fernie, BC. Fresh sushi, warm hospitality, and cozy dine-in or takeout.",
     keywords:
       "Sushi, Japanese food, Korean food, Fernie sushi, Fernie Japanese restaurant, Fernie Korean cuisine, takeout sushi Fernie, dine-in sushi Fernie",
-    url: "https://sushiwood.ca/fernie",
+    // Fernie is served at the site root; /fernie canonicalizes here
+    url: "https://sushiwood.ca/",
     image: "https://sushiwood.ca/og-image.jpg",
     address: {
       street: "1221 7th Ave",
@@ -16,7 +19,12 @@ export const locationData = {
       postalCode: "V0B 1M0",
       country: "CA",
     },
-    phone: "+1-(778)-519-5255",
+    phone: "+1-778-519-5255",
+    email: "sushiwoodinfo@gmail.com",
+    sameAs: [
+      "https://www.facebook.com/sushiwood.fernie",
+      "https://www.instagram.com/ferniesushiwood/",
+    ],
   },
   nelson: {
     name: "SushiWood Nelson",
@@ -34,7 +42,9 @@ export const locationData = {
       postalCode: "V1L 4G2",
       country: "CA",
     },
-    phone: "+1-(778)-463-1117",
+    phone: "+1-778-463-1117",
+    email: "sushiwoodnelson@gmail.com",
+    sameAs: ["https://www.facebook.com/sushiwoodnelson/"],
   },
   castlegar: {
     name: "SushiWood Castlegar",
@@ -50,7 +60,10 @@ export const locationData = {
       postalCode: "V1N 1H0",
       country: "CA",
     },
-    phone: "+1-250-000-3333",
+    // Not yet open — no phone or socials to publish
+    phone: null,
+    email: "sushiwoodcastlegar@gmail.com",
+    sameAs: [],
   },
 } as const;
 
@@ -58,6 +71,7 @@ export type LocationSlug = keyof typeof locationData;
 
 export function restaurantSchema(slug: LocationSlug) {
   const data = locationData[slug];
+  const menu = menuSchema(slug);
   return {
     "@context": "https://schema.org",
     "@type": "Restaurant",
@@ -71,10 +85,29 @@ export function restaurantSchema(slug: LocationSlug) {
       postalCode: data.address.postalCode,
       addressCountry: data.address.country,
     },
-    telephone: data.phone,
+    ...(data.phone ? { telephone: data.phone } : {}),
+    email: data.email,
     url: data.url,
+    ...(data.sameAs.length ? { sameAs: data.sameAs } : {}),
     servesCuisine: ["Japanese", "Korean"],
     priceRange: "$$",
-    cuisineType: ["Japanese", "Korean"],
+    acceptsReservations: true,
+    ...(menu ? { hasMenu: menu } : {}),
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "11:30",
+        closes: "22:00",
+      },
+    ],
   };
 }

@@ -7,6 +7,8 @@ interface Props {
   description?: string;
   ogImage?: string;
   ogUrl?: string;
+  ogType?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -14,6 +16,8 @@ const {
   description = "Sushiwood blends the best of Japanese and Korean cuisine, offering a fusion of traditional flavors with a modern twist. Enjoy fresh sushi, sashimi, and Korean specialties in a cozy, vibrant setting.",
   ogImage = "https://sushiwood.ca/og-image.jpg",
   ogUrl = "https://sushiwood.ca/",
+  ogType = "website",
+  noindex = false,
 } = Astro.props;
 ---
 
@@ -24,12 +28,21 @@ const {
     <link rel="icon" href="/sushiwood/favicon-with-icon/favicon.ico" sizes="any" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={ogUrl} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="SushiWood" />
+    <meta property="og:locale" content="en_CA" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <!-- Fonts load async (media=print swap) so they never block first paint; display=swap shows fallback text meanwhile -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
