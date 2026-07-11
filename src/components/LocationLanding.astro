@@ -16,8 +16,8 @@ const { location } = Astro.props;
 ---
 
 <main class="flex flex-col gap-y-24">
-  <!-- Popup is hidden until triggered — no need to block page load -->
-  <Popup client:idle />
+  <!-- Popup wrapper is ~2KB (form code is lazy-loaded on open), so client:load is cheap and reliable -->
+  <Popup client:load />
 
   <!-- Hero image is static HTML — LCP element is in the first byte -->
   <HeroStatic />

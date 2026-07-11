@@ -14,7 +14,14 @@ const NAV_ITEMS = [
 
 const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
+	// Overlay images (~90KB) only download once the menu is first opened
+	const [overlayMounted, setOverlayMounted] = useState(false);
 	const { toggle } = usePopupStore();
+
+	const openMenu = () => {
+		setOverlayMounted(true);
+		setMenuOpen(!menuOpen);
+	};
 
 	const formattedDate = new Date().toLocaleDateString('en-US', {
 		month: 'short',
@@ -27,11 +34,11 @@ const Header = () => {
 			<MaxWidthContent className='flex justify-between items-center px-4'>
 				<a href='#home' className='cursor-pointer'>
 					<figure className='overflow-hidden'>
-						<img height={225} width={225} src='/sushiwood/main-logo.webp' alt='Clouds with text logo' className='h-15 w-10' />
+						<img height={150} width={150} src='/sushiwood/main-logo.webp' alt='Clouds with text logo' className='h-15 w-10' />
 					</figure>
 				</a>
 
-				<button className='sm:hidden flex flex-col gap-1 z-50 cursor-pointer' aria-label='Menu' onClick={() => setMenuOpen(!menuOpen)}>
+				<button className='sm:hidden flex flex-col gap-1 z-50 cursor-pointer' aria-label='Menu' onClick={openMenu}>
 					<span className='h-3 w-3 rounded-full bg-white inline-block'></span>
 					<span className='h-3 w-3 rounded-full bg-white inline-block'></span>
 					<span className='h-3 w-3 rounded-full bg-white inline-block'></span>
@@ -56,7 +63,8 @@ const Header = () => {
 				</nav>
 			</MaxWidthContent>
 
-			{/* Mobile full-screen menu */}
+			{/* Mobile full-screen menu — not mounted until first opened */}
+			{overlayMounted && (
 			<div
 				className={`sm:hidden fixed inset-0 bg-gray-800 transition-all duration-1000 ${
 					menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -71,13 +79,13 @@ const Header = () => {
 					<div className='opacity-95 rounded-full overflow-hidden relative -left-14'>
 						<div>
 							<figure>
-								<img className='w-72 h-72 object-cover' src='/menu.png' alt='Food with various ingredients' width={100} height={100} />
+								<img className='w-72 h-72 object-cover' src='/menu-mobile.webp' alt='Food with various ingredients' width={576} height={576} />
 							</figure>
 							<div className='bg-black/80 inset-0 absolute' />
 							<div className='absolute text-white inset-0 top-6 z-[70] flex flex-col gap-y-5'>
 								<a href='#home' onClick={() => setMenuOpen(false)}>
 									<figure className='overflow-hidden'>
-										<img height={225} width={225} src='/sushiwood/main-logo.webp' alt='Clouds with text logo' className='h-[50px] w-[50px] justify-self-center mr-12' />
+										<img height={150} width={150} src='/sushiwood/main-logo.webp' alt='Clouds with text logo' className='h-[50px] w-[50px] justify-self-center mr-12' />
 									</figure>
 								</a>
 								<p className='border-b-2 pl-20 pb-4'>Sushiwood</p>
@@ -124,6 +132,7 @@ const Header = () => {
 					</a>
 				</footer>
 			</div>
+			)}
 		</header>
 	);
 };

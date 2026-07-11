@@ -68,6 +68,8 @@ const Menu = ({
               alt={"menu"}
               height={3300}
               width={2550}
+              loading="lazy"
+              decoding="async"
               style={{ objectFit: "cover" }}
             />
           </SwiperSlide>
@@ -106,6 +108,8 @@ const Menu = ({
                     alt={"menu"}
                     height={3300}
                     width={2550}
+                    loading="lazy"
+                    decoding="async"
                     style={{ objectFit: "cover" }}
                   />
                 </SwiperSlide>
