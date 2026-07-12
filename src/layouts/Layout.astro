@@ -1,6 +1,7 @@
 ---
 import "@/styles/globals.css";
 import Header from "@/_component/Header";
+import { SITE_URL } from "@/lib/locationData";
 
 interface Props {
   title?: string;
@@ -14,8 +15,8 @@ interface Props {
 const {
   title = "Sushiwood Fernie",
   description = "Sushiwood blends the best of Japanese and Korean cuisine, offering a fusion of traditional flavors with a modern twist. Enjoy fresh sushi, sashimi, and Korean specialties in a cozy, vibrant setting.",
-  ogImage = "https://sushiwood.ca/og-image.jpg",
-  ogUrl = "https://sushiwood.ca/",
+  ogImage = `${SITE_URL}/og-image.jpg`,
+  ogUrl = `${SITE_URL}/`,
   ogType = "website",
   noindex = false,
 } = Astro.props;

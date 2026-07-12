@@ -1,6 +1,10 @@
 // Single source of truth for per-location page metadata and structured data
 import { menuSchema } from "@/lib/menuData";
 
+// Every URL below is derived from this one env var — change PUBLIC_SITE_URL
+// in .env and the whole site (canonicals, OG tags, schema, sitemap) follows.
+export const SITE_URL = import.meta.env.PUBLIC_SITE_URL.replace(/\/$/, "");
+
 export const locationData = {
   fernie: {
     name: "SushiWood Fernie",
@@ -10,8 +14,8 @@ export const locationData = {
     keywords:
       "Sushi, Japanese food, Korean food, Fernie sushi, Fernie Japanese restaurant, Fernie Korean cuisine, takeout sushi Fernie, dine-in sushi Fernie",
     // Fernie is served at the site root; /fernie canonicalizes here
-    url: "https://sushiwood.ca/",
-    image: "https://sushiwood.ca/og-image.jpg",
+    url: `${SITE_URL}/`,
+    image: `${SITE_URL}/og-image.jpg`,
     address: {
       street: "1221 7th Ave",
       city: "Fernie",
@@ -33,8 +37,8 @@ export const locationData = {
       "Discover SushiWood Nelson, your go-to spot for fresh sushi and Korean classics in Nelson, BC.",
     keywords:
       "Sushi, Japanese food, Korean food, Nelson sushi, Nelson Japanese restaurant, Nelson Korean cuisine, takeout sushi Nelson, dine-in sushi Nelson",
-    url: "https://sushiwood.ca/nelson",
-    image: "https://sushiwood.ca/og-image.jpg",
+    url: `${SITE_URL}/nelson`,
+    image: `${SITE_URL}/og-image.jpg`,
     address: {
       street: "702 Vernon St",
       city: "Nelson",
@@ -51,8 +55,8 @@ export const locationData = {
     title: "SushiWood Castlegar | Korean & Japanese Fusion",
     description:
       "Try SushiWood Castlegar for the best Japanese and Korean dishes in Castlegar, BC. Dine-in and takeout available.",
-    url: "https://sushiwood.ca/castlegar",
-    image: "https://sushiwood.ca/og-image.jpg",
+    url: `${SITE_URL}/castlegar`,
+    image: `${SITE_URL}/og-image.jpg`,
     address: {
       street: "789 Columbia Ave",
       city: "Castlegar",
